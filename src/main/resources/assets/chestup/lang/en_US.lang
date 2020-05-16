@@ -1,0 +1,21 @@
+tile.chestup:WRIRON.name=Wrougth Iron Chest
+tile.chestup:STEEL.name=Steel Chest
+tile.chestup:ALUMINIUM.name=Aluminium Chest
+tile.chestup:HSLA.name=HSLA Chest
+tile.chestup:TITANIUM.name=Titanium Chest
+tile.chestup:WOLFRAM.name=Tungsten Steel Chest
+tile.chestup:CHROME.name=Chrome Chest
+tile.chestup:IRIDIUM.name=Iridium Chest
+tile.chestup:OSMIUM.name=Osmium Chest
+tile.chestup:NEUTRONIUM.name=Neutronium Chest
+
+item.chestup:WOODWRIRON.name=Wood to Wrought Iron Chest Upgrade
+item.chestup:WRIRONSTEEL.name=Wrought Iron to Steel Chest Upgrade
+item.chestup:STEELALUMINIUM.name=Steel to Aluminium Chest Upgrade
+item.chestup:ALUMINIUMHSLA.name=Aluminium to HSLA Chest Upgrade
+item.chestup:HSLATITANIUM.name=HSLA to Titanium Chest Upgrade
+item.chestup:TITANIUMWOLFRAM.name=Titanium to Tungsten Steel Chest Upgrade
+item.chestup:WOLFRAMCHROME.name=Tungsten Steel to Chrome Chest Upgrade
+item.chestup:CHROMEIRIDIUM.name=Chrome to Iridium Chest Upgrade
+item.chestup:IRIDIUMOSMIUM.name=Iridium to Osmium Chest Upgrade
+item.chestup:OSMIUMNEUTRONIUM.name=Osmium to Neutronium Chest Upgrade
