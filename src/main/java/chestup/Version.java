@@ -4,7 +4,7 @@
  *
  * Contributors: cpw - initial API and implementation
  ******************************************************************************/
-package cpw.mods.ironchest;
+package chestup;
 
 import java.util.Properties;
 

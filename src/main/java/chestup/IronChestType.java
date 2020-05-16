@@ -8,41 +8,40 @@
  * Contributors:
  *     cpw - initial API and implementation
  ******************************************************************************/
-package cpw.mods.ironchest;
+package chestup;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.util.IIcon;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public enum IronChestType {
-    IRON(54, 9, true, "Iron Chest", "ironchest.png", 0, Arrays.asList("ingotIron", "ingotRefinedIron"), TileEntityIronChest.class, "mmmmPmmmm", "mGmG3GmGm"),
-    GOLD(81, 9, true, "Gold Chest", "goldchest.png", 1, Arrays.asList("ingotGold"), TileEntityGoldChest.class, "mmmmPmmmm", "mGmG4GmGm"),
-    DIAMOND(108, 12, true, "Diamond Chest", "diamondchest.png", 2, Arrays.asList("gemDiamond"), TileEntityDiamondChest.class, "GGGmPmGGG", "GGGG4Gmmm"),
-    COPPER(45, 9, false, "Copper Chest", "copperchest.png", 3, Arrays.asList("ingotCopper"), TileEntityCopperChest.class, "mmmmCmmmm"),
-    SILVER(72, 9, false, "Silver Chest", "silverchest.png", 4, Arrays.asList("ingotSilver"), TileEntitySilverChest.class, "mmmm3mmmm", "mGmG0GmGm"),
-    CRYSTAL(108, 12, true, "Crystal Chest", "crystalchest.png", 5, Arrays.asList("blockGlass"), TileEntityCrystalChest.class, "GGGGPGGGG"),
-    OBSIDIAN(108, 12, false, "Obsidian Chest", "obsidianchest.png", 6, Arrays.asList("obsidian"), TileEntityObsidianChest.class, "mmmm2mmmm"),
-    DIRTCHEST9000(1, 1, false, "Dirt Chest 9000", "dirtchest.png", 7, Arrays.asList("dirt"), TileEntityDirtChest.class, Item.getItemFromBlock(Blocks.dirt), "mmmmCmmmm"),
+    WRIRON(45, 9, 5, true, "Wrougth Iron Chest", "0.png", 0, Arrays.asList("plateWrougthIron"), TileEntityIronChest.class),
+    STEEL(63, 9, 7, true, "Steel Chest", "1.png", 1, Arrays.asList("plateSteel"), TEsteel.class),
+    ALUMINIUM(81, 9, 9, true, "Aluminium Chest", "2.png", 2, Arrays.asList("plateAluminium"), TEaluminium.class),
+    HSLA(99, 11, 9, true, "HSLA Chest", "3.png", 3, Arrays.asList("plateHSLA"), TEhsla.class),
+    TITANIUM(117, 13, 9, true, "Titanium Chest", "4.png", 4, Arrays.asList("plateTitanium"), TEtitanium.class),
+    WOLFRAM(135, 15, 9, true, "Tungsten Steel Chest", "5.png", 5, Arrays.asList("plateTungstenSteel"), TEwolfram.class),
+    CHROME(153, 17, 9, true, "Chrome Chest", "6.png", 6, Arrays.asList("plateChrome"), TEchrome.class),
+    IRIDIUM(171, 19, 9, true, "Iridium Chest", "7.png", 7, Arrays.asList("plateIridium"), TEiridium.class),
+    OSMIUM(189, 21, 9, true, "Osmium Chest", "8.png", 8, Arrays.asList("plateOsmium"), TEosmium.class),
+    NEUTRONIUM(207, 23, 9, true, "Neutronium Chest", "9.png", 9, Arrays.asList("plateNeutronium"), TEneutronium.class),
     WOOD(0, 0, false, "", "", -1, Arrays.asList("plankWood"), null);
     private static String[] sideNames = {"top", "front", "side"};
     private static int[] sideMapping = {0, 0, 2, 1, 2, 2, 2};
     public String friendlyName;
     public Class<? extends TileEntityIronChest> clazz;
     int size;
-    private int rowLength;
+    private int rowLength, rowY;
     private boolean tieredChest;
     private String modelTexture;
     private int textureRow;
@@ -52,15 +51,35 @@ public enum IronChestType {
     @SideOnly(Side.CLIENT)
     private IIcon[] icons;
 
-    IronChestType(int size, int rowLength, boolean tieredChest, String friendlyName, String modelTexture, int textureRow, List<String> mats,
+    IronChestType(int size, int rowX, boolean tieredChest, String friendlyName, String modelTexture, int textureRow, List<String> mats,
+                  Class<? extends TileEntityIronChest> clazz) {
+        this(size, rowX, tieredChest, friendlyName, modelTexture, textureRow, mats, clazz, (Item) null);
+    }
+
+    IronChestType(int size, int rowX, int rowY, boolean tieredChest, String friendlyName, String modelTexture, int textureRow, List<String> mats,
                   Class<? extends TileEntityIronChest> clazz, String... recipes) {
-        this(size, rowLength, tieredChest, friendlyName, modelTexture, textureRow, mats, clazz, (Item) null, recipes);
+        this(size, rowX, rowY, tieredChest, friendlyName, modelTexture, textureRow, mats, clazz, (Item) null);
     }
 
     IronChestType(int size, int rowLength, boolean tieredChest, String friendlyName, String modelTexture, int textureRow, List<String> mats,
-                  Class<? extends TileEntityIronChest> clazz, Item itemFilter, String... recipes) {
+                  Class<? extends TileEntityIronChest> clazz, Item itemFilter) {
         this.size = size;
         this.rowLength = rowLength;
+        this.tieredChest = tieredChest;
+        this.friendlyName = friendlyName;
+        this.modelTexture = modelTexture;
+        this.textureRow = textureRow;
+        this.clazz = clazz;
+        this.itemFilter = itemFilter;
+        this.matList = new ArrayList<String>();
+        matList.addAll(mats);
+    }
+
+    IronChestType(int size, int rowX, int rowY, boolean tieredChest, String friendlyName, String modelTexture, int textureRow, List<String> mats,
+                  Class<? extends TileEntityIronChest> clazz, Item itemFilter) {
+        this.size = size;
+        this.rowLength = rowX;
+        this.rowY = rowY;
         this.tieredChest = tieredChest;
         this.friendlyName = friendlyName;
         this.modelTexture = modelTexture;
@@ -93,44 +112,10 @@ public enum IronChestType {
     public static void registerBlocksAndRecipes(BlockIronChest blockResult) {
         Object previous = "chestWood";
         for (IronChestType typ : values()) {
-            generateRecipesForType(blockResult, previous, typ);
             ItemStack chest = new ItemStack(blockResult, 1, typ.ordinal());
             if (typ.isValidForCreativeMode()) GameRegistry.registerCustomItemStack(typ.friendlyName, chest);
             if (typ.tieredChest) previous = chest;
         }
-    }
-
-    public static void generateRecipesForType(BlockIronChest blockResult, Object previousTier, IronChestType type) {
-        for (String recipe : type.recipes) {
-            String[] recipeSplit = new String[]{recipe.substring(0, 3), recipe.substring(3, 6), recipe.substring(6, 9)};
-            Object mainMaterial = null;
-            for (String mat : type.matList) {
-                mainMaterial = translateOreName(mat);
-                addRecipe(new ItemStack(blockResult, 1, type.ordinal()), recipeSplit,
-                        'm', mainMaterial, 'P', previousTier, /* previous tier of chest */
-                        'G', "blockGlass", 'C', "chestWood",
-                        '0', new ItemStack(blockResult, 1, 0), /* Iron Chest */
-                        '1', new ItemStack(blockResult, 1, 1), /* Gold Chest */
-                        '2', new ItemStack(blockResult, 1, 2), /* Diamond Chest */
-                        '3', new ItemStack(blockResult, 1, 3), /* Copper Chest */
-                        '4', new ItemStack(blockResult, 1, 4)  /* Silver Chest */
-                );
-            }
-        }
-    }
-
-    public static Object translateOreName(String mat) {
-        if (mat.equals("obsidian")) {
-            return Blocks.obsidian;
-        } else if (mat.equals("dirt")) {
-            return Blocks.dirt;
-        }
-        return mat;
-    }
-
-    public static void addRecipe(ItemStack is, Object... parts) {
-        ShapedOreRecipe oreRecipe = new ShapedOreRecipe(is, parts);
-        GameRegistry.addRecipe(oreRecipe);
     }
 
     public static int validateMeta(int i) {
@@ -157,8 +142,12 @@ public enum IronChestType {
         return rowLength;
     }
 
+    public int getRowY() {
+        return rowY;
+    }
+
     public boolean isTransparent() {
-        return this == CRYSTAL;
+        return this == NEUTRONIUM;
     }
 
     public List<String> getMatList() {
@@ -170,7 +159,7 @@ public enum IronChestType {
     }
 
     public boolean isExplosionResistant() {
-        return this == OBSIDIAN;
+        return this == NEUTRONIUM;
     }
 
     @SideOnly(Side.CLIENT)
@@ -179,7 +168,7 @@ public enum IronChestType {
             icons = new IIcon[3];
             int i = 0;
             for (String s : sideNames) {
-                icons[i++] = par1IconRegister.registerIcon(String.format("ironchest:%s_%s", name().toLowerCase(), s));
+                icons[i++] = par1IconRegister.registerIcon(String.format("chestup:%s_%s", name().toLowerCase(), s));
             }
         }
     }
@@ -199,8 +188,5 @@ public enum IronChestType {
     }
 
     public void adornItemDrop(ItemStack item) {
-        if (this == DIRTCHEST9000) {
-            item.setTagInfo("dirtchest", new NBTTagByte((byte) 1));
-        }
     }
 }

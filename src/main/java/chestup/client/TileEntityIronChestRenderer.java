@@ -8,14 +8,14 @@
  * Contributors:
  * cpw - initial API and implementation
  ******************************************************************************/
-package cpw.mods.ironchest.client;
+package chestup.client;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMap.Builder;
 import com.google.common.primitives.SignedBytes;
-import cpw.mods.ironchest.IronChestType;
-import cpw.mods.ironchest.MappableItemStackWrapper;
-import cpw.mods.ironchest.TileEntityIronChest;
+import chestup.IronChestType;
+import chestup.MappableItemStackWrapper;
+import chestup.TileEntityIronChest;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -43,7 +43,7 @@ public class TileEntityIronChestRenderer extends TileEntitySpecialRenderer {
     static {
         Builder<IronChestType, ResourceLocation> builder = ImmutableMap.<IronChestType, ResourceLocation>builder();
         for (IronChestType typ : IronChestType.values()) {
-            builder.put(typ, new ResourceLocation("ironchest", "textures/model/" + typ.getModelTexture()));
+            builder.put(typ, new ResourceLocation("chestup", "textures/model/" + typ.getModelTexture()));
         }
         locations = builder.build();
     }

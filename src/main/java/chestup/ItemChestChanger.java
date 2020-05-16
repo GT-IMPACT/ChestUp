@@ -8,7 +8,7 @@
  * Contributors:
  *     cpw - initial API and implementation
  ******************************************************************************/
-package cpw.mods.ironchest;
+package chestup;
 
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
@@ -21,7 +21,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class ItemChestChanger extends Item {
 
@@ -31,7 +34,7 @@ public class ItemChestChanger extends Item {
         super();
         setMaxStackSize(1);
         this.type = type;
-        setUnlocalizedName("ironchest:" + type.name());
+        setUnlocalizedName("chestup:" + type.name());
         setCreativeTab(CreativeTabs.tabMisc);
     }
 
@@ -39,7 +42,7 @@ public class ItemChestChanger extends Item {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister par1IconRegister) {
-        this.itemIcon = par1IconRegister.registerIcon("ironchest:" + type.itemName);
+        this.itemIcon = par1IconRegister.registerIcon("chestup:" + type.itemName);
     }
 
     @Override
@@ -97,5 +100,13 @@ public class ItemChestChanger extends Item {
 
     public ChestChangerType getType() {
         return type;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public void addInformation(ItemStack item, EntityPlayer par2, List aList, boolean b) {
+        super.addInformation(item, par2, aList, b);
+        aList.add("Use on chest for upgrade");
+        aList.add("Author: " + EnumChatFormatting.YELLOW + "4gname");
     }
 }

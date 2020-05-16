@@ -8,11 +8,15 @@
  * Contributors:
  *     cpw - initial API and implementation
  ******************************************************************************/
-package cpw.mods.ironchest;
+package chestup;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
+
+import java.util.List;
 
 public class ItemIronChest extends ItemBlock {
 
@@ -29,6 +33,13 @@ public class ItemIronChest extends ItemBlock {
 
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
-        return "tile.ironchest:" + IronChestType.values()[itemstack.getItemDamage()].name();
+        return "tile.chestup:" + IronChestType.values()[itemstack.getItemDamage()].name();
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public void addInformation(ItemStack item, EntityPlayer par2, List aList, boolean b) {
+        super.addInformation(item, par2, aList, b);
+        aList.add("Author: " + EnumChatFormatting.YELLOW + "4gname");
     }
 }

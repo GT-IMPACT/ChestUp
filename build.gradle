@@ -1,4 +1,4 @@
-// This sets us up for building a forge project - you need all of these
+
 buildscript {
     repositories {
         mavenCentral()
@@ -28,61 +28,43 @@ buildscript {
     }
 }
 
-// Apply the forge plugin - this adds all the magic for automatically obfuscating, deobfuscating etc
 apply plugin: 'forge'
 
-// This is a simple flatdir repository for "uploadArchives" when you don't have a remote repo to target
 repositories {
     flatDir {
         name "fileRepo"
         dirs "repo"
     }
 }
-// IronChest uses git tagging to mark major versions. This sets up the project version to that version data
-def versionInfo = getGitVersion()
-version = "${versionInfo['IronChest.version']}"
+version = "0.1a"
+group= "" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "chestup"
 
-// This is our group. I'm cpw.mods
-group= "cpw.mods" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-// This is our actual project within the group. Note: FML has "fml" here. But this is ironchest.
-archivesBaseName = "ironchest"
-
-// Setup the forge minecraft plugin data. Specify the preferred forge/minecraft version here
 minecraft {
     version = "1.7.10-10.13.4.1614-1.7.10"
 }
 
-// This wrangles the resources for the jar files- stuff like textures and languages
 processResources
 {
-    // we're omitting the .xcf files - they're development only
 	exclude '**/*.xcf'
-    // we only want to do search/replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-                
-        // replace version and mcversion
+
         expand 'version':project.version, 'mcversion':project.minecraft.version
     }
-        
-    // copy everything else, thats not the mcmod.info
+
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
 
-	// generate version.properties file from the git version data earlier
 	doLast {
 		def propsFile = new File(destinationDir, 'version.properties')
 		def properties = new Properties()
-		properties.putAll(versionInfo)
-		properties['IronChest.build.mcversion'] = project.minecraft.version
+		properties['chestup.build.mcversion'] = project.minecraft.version
 		properties.store(propsFile.newWriter(), null)
 	}
 }
 
-// this sets our output jar to have a 'tag' of 'universal' on it
-// It also adds the minecraft version in a custom version name
-// The result is files named <projectname>-<mcversion>-<version>-universal.jar
 jar {
     classifier = 'universal'
     version = "${project.minecraft.version}-${project.version}"

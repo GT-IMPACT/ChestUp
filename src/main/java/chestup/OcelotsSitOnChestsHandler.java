@@ -1,4 +1,4 @@
-package cpw.mods.ironchest;
+package chestup;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.ai.EntityAIOcelotSit;

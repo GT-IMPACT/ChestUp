@@ -1,4 +1,4 @@
-package cpw.mods.ironchest;
+package chestup;
 
 import net.minecraft.entity.ai.EntityAIOcelotSit;
 import net.minecraft.entity.passive.EntityOcelot;

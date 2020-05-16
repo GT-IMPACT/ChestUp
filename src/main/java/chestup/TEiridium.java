@@ -8,10 +8,11 @@
  * Contributors:
  *     cpw - initial API and implementation
  ******************************************************************************/
-package cpw.mods.ironchest;
+package chestup;
 
-public class TileEntitySilverChest extends TileEntityIronChest {
-    public TileEntitySilverChest() {
-        super(IronChestType.SILVER);
+public class TEiridium extends TileEntityIronChest {
+
+    public TEiridium() {
+        super(IronChestType.IRIDIUM);
     }
 }

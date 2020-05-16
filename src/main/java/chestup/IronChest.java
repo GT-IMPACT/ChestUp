@@ -8,7 +8,7 @@
  * Contributors:
  *     cpw - initial API and implementation
  ******************************************************************************/
-package cpw.mods.ironchest;
+package chestup;
 
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
@@ -26,12 +26,12 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.logging.log4j.Level;
 
-@Mod(modid = "IronChest", name = "Iron Chests", dependencies = "required-after:Forge@[10.10,);required-after:FML@[7.2,)")
+@Mod(modid = "chestup", name = "Chest Up", dependencies = "required-after:Forge@[10.10,);required-after:FML@[7.2,)")
 public class IronChest {
     public static BlockIronChest ironChestBlock;
-    @SidedProxy(clientSide = "cpw.mods.ironchest.client.ClientProxy", serverSide = "cpw.mods.ironchest.CommonProxy")
+    @SidedProxy(clientSide = "chestup.client.ClientProxy", serverSide = "chestup.CommonProxy")
     public static CommonProxy proxy;
-    @Instance("IronChest")
+    @Instance("chestup")
     public static IronChest instance;
     public static boolean CACHE_RENDER = true;
     public static boolean OCELOTS_SITONCHESTS = true;
@@ -53,19 +53,18 @@ public class IronChest {
                 cfg.save();
         }
         ironChestBlock = new BlockIronChest();
-        GameRegistry.registerBlock(ironChestBlock, ItemIronChest.class, "BlockIronChest");
+        GameRegistry.registerBlock(ironChestBlock, ItemIronChest.class, "Blockchestup");
         PacketHandler.INSTANCE.ordinal();
     }
 
     @EventHandler
     public void load(FMLInitializationEvent evt) {
         for (IronChestType typ : IronChestType.values()) {
-            GameRegistry.registerTileEntityWithAlternatives(typ.clazz, "IronChest." + typ.name(), typ.name());
+            GameRegistry.registerTileEntityWithAlternatives(typ.clazz, "chestup." + typ.name(), typ.name());
             proxy.registerTileEntitySpecialRenderer(typ);
         }
         OreDictionary.registerOre("chestWood", Blocks.chest);
         IronChestType.registerBlocksAndRecipes(ironChestBlock);
-        ChestChangerType.generateRecipes();
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
         proxy.registerRenderInformation();
 //        if (OCELOTS_SITONCHESTS)

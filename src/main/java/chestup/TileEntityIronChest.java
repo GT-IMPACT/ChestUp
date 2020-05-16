@@ -8,7 +8,7 @@
  * Contributors:
  *     cpw - initial API and implementation
  ******************************************************************************/
-package cpw.mods.ironchest;
+package chestup;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,7 +39,7 @@ public class TileEntityIronChest extends TileEntity implements IInventory {
     private boolean hadStuff;
 
     public TileEntityIronChest() {
-        this(IronChestType.IRON);
+        this(IronChestType.WRIRON);
     }
 
     protected TileEntityIronChest(IronChestType type) {

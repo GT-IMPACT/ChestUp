@@ -8,7 +8,7 @@
  * Contributors:
  *     cpw - initial API and implementation
  ******************************************************************************/
-package cpw.mods.ironchest;
+package chestup;
 
 import com.google.common.collect.Lists;
 import cpw.mods.fml.relauncher.Side;
@@ -49,7 +49,7 @@ public class BlockIronChest extends BlockContainer {
 
     public BlockIronChest() {
         super(Material.iron);
-        setBlockName("IronChest");
+        setBlockName("chestup");
         setHardness(3.0F);
         setBlockBounds(0.0625F, 0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
         random = new Random();

@@ -8,12 +8,12 @@
  * Contributors:
  *     cpw - initial API and implementation
  ******************************************************************************/
-package cpw.mods.ironchest.client;
+package chestup.client;
 
 import com.google.common.collect.Maps;
-import cpw.mods.ironchest.IronChest;
-import cpw.mods.ironchest.IronChestType;
-import cpw.mods.ironchest.TileEntityIronChest;
+import chestup.IronChest;
+import chestup.IronChestType;
+import chestup.TileEntityIronChest;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererChestHelper;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;

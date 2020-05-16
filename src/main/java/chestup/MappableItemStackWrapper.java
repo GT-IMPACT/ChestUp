@@ -1,4 +1,4 @@
-package cpw.mods.ironchest;
+package chestup;
 
 import net.minecraft.item.ItemStack;
 
