@@ -52,7 +52,7 @@ public enum ChestChangerType {
 
     public ItemChestChanger buildItem(Configuration cfg) {
         item = new ItemChestChanger(this);
-        GameRegistry.registerItem(item, itemName);
+        //GameRegistry.registerItem(item, itemName);
         return item;
     }
 }

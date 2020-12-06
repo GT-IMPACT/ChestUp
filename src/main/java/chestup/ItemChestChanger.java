@@ -50,13 +50,13 @@ public class ItemChestChanger extends Item {
         if (world.isRemote) return false;
         TileEntity te = world.getTileEntity(X, Y, Z);
         TileEntityIronChest newchest;
-        if (te != null && te instanceof TileEntityIronChest) {
+        if (te instanceof TileEntityIronChest) {
             TileEntityIronChest ironchest = (TileEntityIronChest) te;
             newchest = ironchest.applyUpgradeItem(this);
             if (newchest == null) {
                 return false;
             }
-        } else if (te != null && te instanceof TileEntityChest) {
+        } else if (te instanceof TileEntityChest) {
             TileEntityChest tec = (TileEntityChest) te;
             if (tec.numPlayersUsing > 0) {
                 return false;

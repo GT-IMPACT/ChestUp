@@ -22,6 +22,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GUIChest extends GuiContainer {
     private GUI type;
+    private String mName;
 
     private GUIChest(GUI type, IInventory player, IInventory chest) {
         super(type.makeContainer(player, chest));
@@ -33,6 +34,42 @@ public class GUIChest extends GuiContainer {
 
     public int getRowLength() {
         return type.mainType.getRowLength();
+    }
+
+    @Override
+    protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
+        switch (this.type) {
+            case WRIRON:
+                this.mName = "Wrought Iron Chest";
+                break;
+            case STEEL:
+                this.mName = "Steel Chest";
+                break;
+            case ALUMINIUM:
+                this.mName = "Aluminium Chest";
+                break;
+            case HSLA:
+                this.mName = "HSLA Chest";
+                break;
+            case TITANIUM:
+                this.mName = "Titanium Chest";
+                break;
+            case WOLFRAM:
+                this.mName = "Tungsten Steel Chest";
+                break;
+            case CHROME:
+                this.mName = "Chrome Chest";
+                break;
+            case IRIDIUM:
+                this.mName = "Iridium Chest";
+                break;
+            case OSMIUM:
+                this.mName = "Osmium Chest";
+                break;
+            case NEUTRONIUM:
+                this.mName = "Neutronium Chest";
+        }
+        fontRendererObj.drawString(this.mName, 8, 7, 0);
     }
 
     @Override
