@@ -19,3 +19,6 @@ item.chestup:WOLFRAMCHROME.name=Tungsten Steel to Chrome Chest Upgrade
 item.chestup:CHROMEIRIDIUM.name=Chrome to Iridium Chest Upgrade
 item.chestup:IRIDIUMOSMIUM.name=Iridium to Osmium Chest Upgrade
 item.chestup:OSMIUMNEUTRONIUM.name=Osmium to Neutronium Chest Upgrade
+
+item.chestup.size=Size
+
