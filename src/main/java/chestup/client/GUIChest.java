@@ -20,6 +20,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
+import static net.minecraft.util.StatCollector.translateToLocal;
+
 public class GUIChest extends GuiContainer {
     private GUI type;
     private String mName;
@@ -38,37 +40,7 @@ public class GUIChest extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
-        switch (this.type) {
-            case WRIRON:
-                this.mName = "Wrought Iron Chest";
-                break;
-            case STEEL:
-                this.mName = "Steel Chest";
-                break;
-            case ALUMINIUM:
-                this.mName = "Aluminium Chest";
-                break;
-            case HSLA:
-                this.mName = "HSLA Chest";
-                break;
-            case TITANIUM:
-                this.mName = "Titanium Chest";
-                break;
-            case WOLFRAM:
-                this.mName = "Tungsten Steel Chest";
-                break;
-            case CHROME:
-                this.mName = "Chrome Chest";
-                break;
-            case IRIDIUM:
-                this.mName = "Iridium Chest";
-                break;
-            case OSMIUM:
-                this.mName = "Osmium Chest";
-                break;
-            case NEUTRONIUM:
-                this.mName = "Neutronium Chest";
-        }
+        this.mName = translateToLocal("tile.chestup:" + type.toString() + ".name");
         fontRendererObj.drawString(this.mName, 8, 7, 0);
     }
 
